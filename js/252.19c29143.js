@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkspectre_music_player"]=self["webpackChunkspectre_music_player"]||[]).push([[252],{9252:function(e,n,r){r.r(n),r.d(n,{default:function(){return p}});var c=r(3396);const t=(0,c.createElementVNode)("h1",null,"发现",-1),u=[t];function l(e,n){return(0,c.openBlock)(),(0,c.createElementBlock)("div",null,u)}var s=r(89);const a={},o=(0,s.Z)(a,[["render",l]]);var p=o}}]);
-//# sourceMappingURL=252.19c29143.js.map
