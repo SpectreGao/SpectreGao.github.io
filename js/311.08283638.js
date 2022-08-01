@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkspectre_music_player"]=self["webpackChunkspectre_music_player"]||[]).push([[311],{7311:function(n,e,l){l.r(e),l.d(e,{default:function(){return p}});var r=l(6252);const u=(0,r._)("h1",null,"搜索",-1),t=(0,r._)("br",null,null,-1),s=(0,r._)("br",null,null,-1);function c(n,e){const l=(0,r.up)("el-skeleton");return(0,r.wg)(),(0,r.iD)("div",null,[u,t,(0,r.Wm)(l,{rows:5,animated:""}),s,(0,r.Wm)(l,{rows:5,animated:""})])}var a=l(3744);const i={},o=(0,a.Z)(i,[["render",c]]);var p=o}}]);
+//# sourceMappingURL=311.08283638.js.map
