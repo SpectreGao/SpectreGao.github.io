@@ -1,2 +1,2 @@
 "use strict";(self["webpackChunkspectre_music_player"]=self["webpackChunkspectre_music_player"]||[]).push([[805],{6805:function(e,n,t){t.r(n),t.d(n,{default:function(){return i}});var l=t(6252);const r=(0,l.createElementVNode)("h1",null,"发现",-1),c=(0,l.createElementVNode)("br",null,null,-1),o=(0,l.createElementVNode)("br",null,null,-1);function a(e,n){const t=(0,l.resolveComponent)("el-skeleton");return(0,l.openBlock)(),(0,l.createElementBlock)("div",null,[r,c,(0,l.createVNode)(t,{rows:5,animated:""}),o,(0,l.createVNode)(t,{rows:5,animated:""})])}var u=t(3744);const s={},d=(0,u.Z)(s,[["render",a]]);var i=d}}]);
-//# sourceMappingURL=805.f2aff42c.js.map
+//# sourceMappingURL=805.b09d6e9a.js.map
