@@ -1,1 +1,204 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="Spectre_logo_blue_min.svg"><title>spectre_music_player</title><script defer="defer" src="/js/chunk-vendors.70aa3b45.js"></script><script defer="defer" src="/js/app.c527f485.js"></script><link href="/css/chunk-vendors.18af74b1.css" rel="stylesheet"><link href="/css/app.bc884483.css" rel="stylesheet"></head><body style="overflow: hidden;background: #fbfbfb;"><noscript><strong>We're sorry but spectre_music_player doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div></body></html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>SpectreMusicPlayer</title>
+    <link rel="stylesheet" href="js/lib-master/theme-chalk/index.css">
+    <link rel="stylesheet" href="js/lib-master/theme-chalk/display.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body bgcolor="#333">
+    <div id="Spectre">
+        <el-container>
+            <el-aside id="nav" width="250px">
+                <img src="img/Spectre_logo_blue.svg" width="60%" style="margin: 20px 0 10px 25px;">
+                <el-menu id="navbar" default-active="1" class="el-menu-vertical-demo" background-color="#444"
+                    text-color="#ddd" active-text-color="rgb(0,166,255)" style="border: 0">
+                    <el-menu-item v-for="item in navlist" :index="item.index" @click="navNum=item.index">
+                        <i :class="item.icon"></i>
+                        <span slot="title">{{item.title}}</span>
+                    </el-menu-item>
+                </el-menu>
+            </el-aside>
+            <el-main>
+                <div v-show="navNum==0" :class="(navNum==0)?'showBox':''" id="home_box" class="content">
+                    <h1>首页</h1>
+                    <div class="home_box_right" id="userId" @click="login_dialog=true">
+                        <i class="el-icon-user-solid"></i> 登录网易帐号，体验全部功能
+                    </div>
+                    <el-carousel :interval="3000" type="card" height="280px">
+                        <el-carousel-item v-for="item in banner" :key="item">
+                            <el-image style="width: 100%; height: 100%" :src="item.imageUrl" fit="cover"
+                                :title="item.typeTitle"></el-image>
+                        </el-carousel-item>
+                    </el-carousel>
+                    <h5 class="Notice">暂未开放，敬请期待</h5>
+                </div>
+                <div v-show="navNum==1" :class="(navNum==1)?'showBox':''" id="searchlist_box" class="content">
+                    <h1>搜索歌曲</h1>
+                    <div class="searchInputBox">
+                        <input v-model="searchVal" type="text" placeholder="歌名 / 歌手 / 专辑">
+                        <button @click="searchBtn"><i class="el-icon-search"></i></button>
+                    </div>
+                    <ul class="playlist">
+                        <li v-for="(item,index) in searchlist"
+                            @click="playlist=searchlist;nowMusicIndex = [item.src,index];SMP_getMusic(item.src);"
+                            :id="(nowMusicIndex[0]==item.src&&nowMusicIndex[1]==index)?'nowMusicIndex':''">
+                            <span>
+                                <i class="el-icon-caret-right"></i>
+                            </span>
+                            <span>{{item.song}}</span>
+                            <span>{{item.singer}}</span>
+                        </li>
+                    </ul>
+                    <div class="selectNowMusicIndex" @click="selectNowMusicIndex('playlist')">
+                        <i class="el-icon-help"></i>
+                    </div>
+                </div>
+                <div v-show="navNum==2" :class="(navNum==2)?'showBox':''" id="playlist_box" class="content">
+                    <h1>播放列表</h1>
+                    <ul class="playlist" id="playlist">
+                        <li v-for="(item,index) in myPlaylist"
+                            @click="playlist=myPlaylist;nowMusicIndex=[item.src,index];SMP_getMusic(item.src);"
+                            :id="(nowMusicIndex[0]==item.src&&nowMusicIndex[1]==index)?'nowMusicIndex':''">
+                            <span>
+                                <i class="el-icon-caret-right"></i>
+                            </span>
+                            <span>{{item.song}}</span>
+                            <span>{{item.singer}}</span>
+                        </li>
+                    </ul>
+                    <div class="selectNowMusicIndex" @click="selectNowMusicIndex('playlist')">
+                        <i class="el-icon-help"></i>
+                    </div>
+                </div>
+                <div v-show="navNum==3" :class="(navNum==3)?'showBox':''" id="game_box" class="content">
+                    <h1>小游戏</h1>
+                    <iframe src="https://spectregao.github.io/games/" frameborder="0"></iframe>
+                </div>
+                <div v-show="navNum==4" :class="(navNum==4)?'showBox':''" id="about_box" class="content">
+                    <h1>关于我们</h1>
+                    <img src="img/Spectre_logo_blue.svg">
+                    <ul>
+                        <li>网站版本：{{versions}}</li>
+                        <li>网站运营：{{runningday}}天</li>
+                        <li>2019 - {{aboutfooter}} &copy; SpectreGao</li>
+                    </ul>
+                    <ul class="a">
+                        <li>
+                            <h3>免责声明</h3>
+                        </li>
+                        <li>
+                            本网站中歌曲均来源于
+                            <a href="https://music.163.com/" target="_blank">网易云音乐</a>
+                            中可免费收听的歌曲
+                        </li>
+                        <li>本网站中游戏均来源于互联网开源项目，作者见游戏板块中</li>
+                        <li>无商业用途，仅供学习参考</li>
+                        <li>如有侵权行为，请联系邮箱进行删除</li>
+                    </ul>
+                    <ul class="a">
+                        <li>
+                            <h3>联系方式</h3>
+                        </li>
+                        <li>
+                            <span>邮箱：</span>
+                            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=EyAiJiokJiQmKyFTYmI9cHx_"
+                                target="_blank">3159757582@qq.com</a>
+                        </li>
+                        <li>
+                            <span>Github：</span>
+                            <a href="https://github.com/SpectreGao" target="_blank">https://github.com/SpectreGao</a>
+                        </li>
+                        <li>
+                            <span>Gitee：</span>
+                            <a href="https://gitee.com/SpectreGao" target="_blank">https://gitee.com/SpectreGao</a>
+                        </li>
+                    </ul>
+                </div>
+            </el-main>
+            <div id="Spectre_musicPlayerBar">
+                <div id="album_pic">
+                    <el-image :src="album_pic" fit="cover">
+                        <div slot="error" class="image-slot">
+                            <i class="el-icon-picture-outline" style="padding: 15px;font-size: 65px;"></i>
+                        </div>
+                    </el-image>
+                </div>
+                <div id="song_info">
+                    <h3 :title="songName">{{songName}}</h3>
+                    <p :title="singer">{{singer}}</p>
+                </div>
+                <div id="timeline" ref="timeline">
+                    <div id="linenow"></div>
+                    <div id="linebar"></div>
+                    <span>{{nowtime}}</span>
+                    <span>{{alltime}}</span>
+                </div>
+                <div id="control">
+                    <i title="下载" class="el-icon-download" @click="downloadMusic(audio_src)"></i>
+                    <i title="上一首" class="el-icon-d-arrow-left" @click="beforeMusic"></i>
+                    <i title="播放/暂停" id="Spectre_play" class="el-icon-video-pause" @click="playpause"></i>
+                    <i title="下一首" class="el-icon-d-arrow-right" @click="nextMusic"></i>
+                    <i title="更多" class="el-icon-more-outline" @click="more"></i>
+                </div>
+                <div id="lyric_box">
+                    <div id="lyric"></div>
+                </div>
+                <audio id="Spectre_audio" :src="audio_src" autoplay></audio>
+            </div>
+        </el-container>
+
+        <el-dialog title="登录网易帐号" :visible.sync="login_dialog" width="350px" :close-on-click-modal="false">
+            <el-tabs @tab-click="login_Form={}">
+                <el-tab-pane label="手机登录">
+                    <el-form ref="login_Form" :model="login_Form" :rules="ruleForm">
+                        <el-form-item prop="phone">
+                            <el-input v-model.trim="login_Form.phone" placeholder="手机号" clearable required></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model.trim="login_Form.password" placeholder="密码" type="password" clearable
+                                required>
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" size="medium" @click="login_btn('phone')" style="width: 100%;">
+                                手机登录
+                            </el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-tab-pane>
+                <el-tab-pane label="邮箱登录">
+                    <el-form ref="login_Form" :model="login_Form" :rules="ruleForm">
+                        <el-form-item prop="email">
+                            <el-input v-model.trim="login_Form.email" placeholder="网易邮箱" clearable required></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-input v-model.trim="login_Form.password" placeholder="密码" clearable type="password"
+                                required>
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" size="medium" @click="login_btn('email')" style="width: 100%;">
+                                邮箱登录
+                            </el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-tab-pane>
+            </el-tabs>
+        </el-dialog>
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/lib-master/index.js"></script>
+    <script src="js/playlist.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

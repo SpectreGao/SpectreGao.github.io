@@ -1,0 +1,487 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: Microsoft YaHei, 微软雅黑, PingFang SC, Arial, sans-serif;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    background: #222;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background: #666;
+}
+
+body {
+    background: #333;
+    color: #ddd;
+}
+
+#nav {
+    position: fixed;
+    height: 100vh;
+    background: #444;
+    padding-bottom: 100px;
+}
+
+@keyframes showBox {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.showBox {
+    animation: showBox .6s;
+}
+
+.el-dialog__body {
+    padding: 0 30px 30px 30px;
+}
+
+.content {
+    position: fixed;
+    left: 250px;
+    top: 0;
+    bottom: 100px;
+    right: 0;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.content h1 {
+    margin-bottom: 15px;
+}
+
+.el-carousel__item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px #333;
+}
+
+.el-carousel__item img {
+    width: 100%;
+    height: 100%;
+}
+
+.home_box_right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 5px;
+    transition: .4s;
+    user-select: none;
+}
+
+.home_box_right:hover,
+.userInfo_mini_followbtn:hover,
+#userInfo_mini_control li:hover {
+    background: #444;
+    color: white;
+}
+
+.home_box_right:active,
+.userInfo_mini_followbtn:active,
+#userInfo_mini_control li:active {
+    background: #222;
+}
+
+#userInfo span {
+    position: relative;
+    top: -16px;
+    left: 5px;
+    padding-right: 5px;
+}
+
+#userInfo_Box_mini {
+    width: 300px;
+    height: 250px;
+    background: #555;
+    position: absolute;
+    top: 75px;
+    right: 20px;
+    z-index: 50;
+    box-shadow: 0 0 20px #222;
+    border-radius: 8px;
+    display: none;
+    overflow: hidden;
+    text-align: center;
+    user-select: none;
+}
+
+.userInfo_mini_followbtn,
+#userInfo_mini_control li {
+    width: 50%;
+    padding: 5px 0;
+    text-align: center;
+    cursor: pointer;
+    transition: .3s;
+    letter-spacing: 1px;
+}
+
+#userInfo_mini_control li {
+    margin-top: 10px;
+    width: 50%;
+    float: left;
+    padding: 10px 0;
+}
+
+#Spectre_musicPlayerBar {
+    position: fixed;
+    height: 100px;
+    background: #4c4c4c;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 0 10px #333;
+    color: #ddd;
+    cursor: default;
+    z-index: 99999;
+}
+
+#Spectre_musicPlayerBar div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#album_pic {
+    width: 100px;
+    height: 100px;
+}
+
+#album_pic {
+    background: #444;
+}
+
+#song_info {
+    width: 18%;
+    padding: 0 15px;
+}
+
+#song_info h3 {
+    margin-bottom: 10px;
+    font-size: 23px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#song_info p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #bbb;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#control {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 25px;
+    user-select: none;
+}
+
+#control i {
+    padding: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: .5s;
+    margin: 0 5px;
+}
+
+#control i:hover {
+    background: #444;
+    border-radius: 50%;
+    color: rgb(0, 166, 233);
+}
+
+#control i:active {
+    background: #333;
+}
+
+#control i:nth-child(3) {
+    font-size: 40px;
+}
+
+#timeline {
+    position: absolute;
+    width: 40%;
+    height: 4px;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #3e3e3e;
+    border-radius: 5px;
+    transition: .2s;
+}
+
+#linenow {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    top: -2.5px;
+    left: 0;
+    margin-left: -5px;
+    z-index: 1;
+    background: #555;
+}
+
+#linenow:hover {
+    box-shadow: 0 0 5px black;
+}
+
+#linebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    width: 0;
+    background: rgb(0, 166, 233);
+}
+
+#timeline span {
+    float: left;
+    color: #bbb;
+    font-weight: 300;
+    font-size: 13px;
+    padding-top: 10px;
+}
+
+#timeline span:last-child {
+    float: right;
+}
+
+#lyric_box {
+    width: 25%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .6) 15%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, .6) 85%, rgba(255, 255, 255, 0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .6) 15%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, .6) 85%, rgba(255, 255, 55, 0) 100%);
+}
+
+#lyric {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#lyric li {
+    width: 98%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 4px;
+    font-size: 15px;
+    transition: .3s;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 20px;
+    display: block;
+}
+
+.playlist li {
+    width: 98%;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: .4s;
+}
+
+.playlist li span {
+    vertical-align: middle;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: -2px;
+    user-select: none;
+}
+
+.playlist li span:first-child {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+    transition: .3s;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 5px;
+}
+
+.playlist li span:first-child:hover {
+    background: #444;
+}
+
+.playlist li span:nth-child(2) {
+    width: 45%;
+}
+
+.playlist li span:nth-child(3) {
+    width: 35%;
+}
+
+.playlist li:nth-child(odd) {
+    background: #444;
+}
+
+.playlist li:nth-child(even) {
+    background: #555;
+}
+
+.playlist li:hover {
+    background: #666;
+    color: white;
+    transform: scale(1.02);
+    border-radius: 3px;
+}
+
+.playlist li:active {
+    background: #4d4d4d;
+    transform: scale(1.01);
+}
+
+#nowMusicIndex {
+    color: rgb(0, 166, 233);
+    transform: scale(1.01);
+    box-shadow: 0 0 3px #333;
+    z-index: 1;
+    border-radius: 5px;
+    position: relative;
+}
+
+#nowMusicIndex::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    background: rgb(0, 120, 233);
+}
+
+.selectNowMusicIndex {
+    position: fixed;
+    right: 50px;
+    bottom: 120px;
+    width: 30px;
+    height: 30px;
+    background: #777;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 20px;
+    transform: rotate(45deg);
+    box-shadow: 0 0 5px #333;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.selectNowMusicIndex:hover {
+    background: #5d5d5d;
+    color: rgb(0, 166, 233);
+}
+
+.selectNowMusicIndex:active {
+    background: #555;
+}
+
+.searchInputBox {
+    width: 100%;
+    position: relative;
+    height: 50px;
+}
+
+#searchlist_box .searchInputBox input {
+    width: 85%;
+    text-indent: 10px;
+    padding-bottom: 2px;
+}
+
+#searchlist_box .searchInputBox button {
+    float: right;
+    width: 14%;
+    transition: .3s;
+}
+
+#searchlist_box .searchInputBox button:hover {
+    background: rgb(0, 120, 233);
+    box-shadow: 0 0 5px #555;
+}
+
+#searchlist_box .searchInputBox button:active {
+    background: rgb(0, 74, 233);
+}
+
+#searchlist_box .searchInputBox input,
+#searchlist_box .searchInputBox button {
+    background: #555;
+    height: 35px;
+    border: none;
+    box-sizing: border-box;
+    color: white;
+    outline: none;
+    font-size: 17px;
+}
+
+.Notice {
+    font-size: 30px;
+    font-weight: 100;
+    margin: 150px auto;
+    text-align: center;
+}
+
+#about_box img {
+    margin: 20px;
+}
+
+#about_box ul li {
+    margin: 20px;
+}
+
+#about_box .a {
+    margin-top: 30px;
+    margin-left: 15px;
+    border-radius: 5px;
+    border: 1px solid #5d5d5d;
+    padding: 20px;
+}
+
+#about_box .a li {
+    margin: 5px;
+}
+
+#about_box .a li a {
+    color: rgb(135, 158, 235);
+}
+
+#game_box iframe {
+    width: 100%;
+    height: calc(100vh - 190px);
+}

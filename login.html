@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectre</title>
+    <link rel="stylesheet" href="js/lib-master/theme-chalk/index.css">
+    <link rel="stylesheet" href="js/lib-master/theme-chalk/display.css">
+</head>
+
+<body>
+    <div id="app">
+        <el-form :model="form">
+            <el-form-item label="手机">
+                <el-input v-model="form.phone"></el-input>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input v-model="form.password" type="password"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" size="default" @click="login_btn">登录</el-button>
+            </el-form-item>
+        </el-form>
+        <p>登录状态：{{loginStatus}}</p>
+        <pre>{{info}}</pre>
+    </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/lib-master/index.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    form: {},
+                    loginStatus: '尚未登录',
+                    info: 'null',
+                }
+            },
+            methods: {
+                login_btn() {
+                    let t = this;
+                    $.get(`https://autumnfish.cn/login/cellphone?phone=${t.form.phone}&password=${encodeURIComponent(t.form.password)}`, res => {
+                        this.info = res;
+                        console.log(res)
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
